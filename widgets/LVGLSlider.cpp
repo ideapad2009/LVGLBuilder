@@ -36,7 +36,7 @@ protected:
 	}
 };
 
-class LVGLPropertySliderKnob : public LVGLPropertyBool
+/*class LVGLPropertySliderKnob : public LVGLPropertyBool
 {
 public:
 	QString name() const { return "Knob inside"; }
@@ -48,13 +48,13 @@ public:
 protected:
 	bool get(LVGLObject *obj) const { return lv_slider_get_knob_in(obj->obj()); }
 	void set(LVGLObject *obj, bool boolean) { lv_slider_set_knob_in(obj->obj(), boolean); }
-};
+};*/
 
 LVGLSlider::LVGLSlider()
 {
 	m_properties << new LVGLPropertySliderValue;
 	m_properties << new LVGLPropertySliderRange;
-	m_properties << new LVGLPropertySliderKnob;
+//	m_properties << new LVGLPropertySliderKnob;
 
 	m_editableStyles << LVGL::Body; // LV_SLIDER_STYLE_BG
 	m_editableStyles << LVGL::Body; // LV_SLIDER_STYLE_INDIC
@@ -108,21 +108,22 @@ QStringList LVGLSlider::styles() const
 
 lv_style_t *LVGLSlider::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_slider_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_slider_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLSlider::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_slider_set_style(obj, static_cast<lv_slider_style_t>(type), style);
+//	lv_slider_set_style(obj, static_cast<lv_slider_style_t>(type), style);
 }
 
 lv_style_t *LVGLSlider::defaultStyle(int type) const
 {
-	if (type == LV_SLIDER_STYLE_BG)
+/*	if (type == LV_SLIDER_STYLE_BG)
 		return &lv_style_pretty;
 	else if (type == LV_SLIDER_STYLE_INDIC)
 		return &lv_style_pretty_color;
 	else if (type == LV_SLIDER_STYLE_KNOB)
-		return &lv_style_pretty;
+        return &lv_style_pretty;*/
 	return nullptr;
 }

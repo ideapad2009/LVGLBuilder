@@ -56,7 +56,7 @@ protected:
 	QStringList m_values;
 };
 
-class LVGLPropertyImgBtnToggle : public LVGLPropertyBool
+/*class LVGLPropertyImgBtnToggle : public LVGLPropertyBool
 {
 public:
 	QString name() const { return "Toggle"; }
@@ -68,17 +68,17 @@ public:
 protected:
 	bool get(LVGLObject *obj) const { return lv_imgbtn_get_toggle(obj->obj()); }
 	void set(LVGLObject *obj, bool statue) { lv_imgbtn_set_toggle(obj->obj(), statue); }
-};
+};*/
 
 LVGLImageButton::LVGLImageButton()
 {
 	m_properties << new LVGLPropertyImgBtnState;
-	m_properties << new LVGLPropertyImgBtnToggle;
-	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_REL);
-	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_PR);
-	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_TGL_REL);
-	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_TGL_PR);
-	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_INA);
+//	m_properties << new LVGLPropertyImgBtnToggle;
+//	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_REL);
+//	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_PR);
+//	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_TGL_REL);
+//	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_TGL_PR);
+//	m_properties << new LVGLPropertyImgBtnSrc(LV_IMGBTN_STYLE_INA);
 
 	m_editableStyles << LVGL::Image; // LV_IMGBTN_STYLE_REL
 	m_editableStyles << LVGL::Image; // LV_IMGBTN_STYLE_PR
@@ -136,17 +136,18 @@ QStringList LVGLImageButton::styles() const
 
 lv_style_t *LVGLImageButton::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_imgbtn_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_imgbtn_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLImageButton::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_imgbtn_set_style(obj, static_cast<lv_imgbtn_style_t>(type), style);
+//	lv_imgbtn_set_style(obj, static_cast<lv_imgbtn_style_t>(type), style);
 }
 
 lv_style_t *LVGLImageButton::defaultStyle(int type) const
 {
-	if (type == LV_IMGBTN_STYLE_REL)
+/*	if (type == LV_IMGBTN_STYLE_REL)
 		return &lv_style_btn_rel;
 	else if (type == LV_IMGBTN_STYLE_PR)
 		return &lv_style_btn_pr;
@@ -155,6 +156,7 @@ lv_style_t *LVGLImageButton::defaultStyle(int type) const
 	else if (type == LV_IMGBTN_STYLE_TGL_PR)
 		return &lv_style_btn_tgl_pr;
 	else if (type == LV_IMGBTN_STYLE_INA)
-		return &lv_style_btn_ina;
+        return &lv_style_btn_ina;*/
 	return nullptr;
 }
+

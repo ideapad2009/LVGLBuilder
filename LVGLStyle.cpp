@@ -81,7 +81,7 @@ LVGL::StylePart LVGLStyleItem::stylePart() const
 LVGLStyle::LVGLStyle() : LVGLStyleItem("", LVGL::None), m_style(nullptr)
 {
 	LVGLStyleItem *body = new LVGLStyleItem("body", LVGL::Body, this);
-	body->addChild(new LVGLStyleItem("main_color", Color, offsetof(lv_style_t, body.main_color), LVGL::Body, body));
+/*	body->addChild(new LVGLStyleItem("main_color", Color, offsetof(lv_style_t, body.main_color), LVGL::Body, body));
 	body->addChild(new LVGLStyleItem("grad_color", Color, offsetof(lv_style_t, body.grad_color), LVGL::Body, body));
 	body->addChild(new LVGLStyleItem("radius", Coord, offsetof(lv_style_t, body.radius), LVGL::Body, body));
 	body->addChild(new LVGLStyleItem("opa", Opacity, offsetof(lv_style_t, body.opa), LVGL::Body, body));
@@ -128,7 +128,7 @@ LVGLStyle::LVGLStyle() : LVGLStyleItem("", LVGL::None), m_style(nullptr)
 	line->addChild(new LVGLStyleItem("color", Color, offsetof(lv_style_t, line.color), LVGL::Line, line));
 	line->addChild(new LVGLStyleItem("width", Coord, offsetof(lv_style_t, line.width), LVGL::Line, line));
 	line->addChild(new LVGLStyleItem("opa", Opacity, offsetof(lv_style_t, line.opa), LVGL::Line, line));
-	m_childs << line;
+    m_childs << line;*/
 }
 
 QVariant LVGLStyle::get(const LVGLStyleItem *item) const
@@ -146,21 +146,21 @@ QVariant LVGLStyle::get(const LVGLStyleItem *item) const
 		lv_color_t c = *reinterpret_cast<lv_color_t*>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
 		return lvgl.toColor(c);
 	} else if (item->type() == BorderPart) {
-		lv_border_part_t c = *reinterpret_cast<lv_border_part_t*>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
+//		lv_border_part_t c = *reinterpret_cast<lv_border_part_t*>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
 		QStringList props;
-		if (c == 0) return "None";
+/*		if (c == 0) return "None";
 		else if (c == 0x0F) return "Full";
 		else if (c == 0x10) return "Internal";
 
 		if (c & 0x01) props << "Bottom";
 		if (c & 0x02) props << "Top";
 		if (c & 0x04) props << "Left";
-		if (c & 0x08) props << "Right";
+        if (c & 0x08) props << "Right";*/
 		return props.join(" | ");
 	} else if (item->type() == ShadowType) {
-		lv_shadow_type_t c = *reinterpret_cast<lv_shadow_type_t*>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
-		if (c == 0) return "Bottom";
-		else if (c == 1) return "Full";
+//		lv_shadow_type_t c = *reinterpret_cast<lv_shadow_type_t*>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
+//		if (c == 0) return "Bottom";
+//		else if (c == 1) return "Full";
 	} else if (item->type() == Font) {
 		const lv_font_t *c = *reinterpret_cast<lv_font_t**>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
 		const int index = lvgl.indexOfFont(c);
@@ -169,12 +169,12 @@ QVariant LVGLStyle::get(const LVGLStyleItem *item) const
 	return QVariant();
 }
 
-lv_border_part_t LVGLStyle::getBorderPart(const LVGLStyleItem *item) const
+/*lv_border_part_t LVGLStyle::getBorderPart(const LVGLStyleItem *item) const
 {
 	if (item->type() == BorderPart)
 		return *reinterpret_cast<lv_border_part_t*>(reinterpret_cast<uint8_t*>(m_style)+item->offset());
 	return 0;
-}
+}*/
 
 template<class T, class P>
 void set_helper(P value, size_t offset, lv_style_t *style)
@@ -197,8 +197,8 @@ void LVGLStyle::set(const LVGLStyleItem *item, QVariant value)
 		set_helper<lv_color_t>(lvgl.fromColor(value), item->offset(), m_style);
 	else if (item->type() == Font)
 		set_helper<lv_font_ref>(lvgl.font(value.toString()), item->offset(), m_style);
-	else if (item->type() == BorderPart)
-		set_helper<lv_border_part_t>(value.toInt(), item->offset(), m_style);
+//	else if (item->type() == BorderPart)
+//		set_helper<lv_border_part_t>(value.toInt(), item->offset(), m_style);
 }
 
 lv_style_t *LVGLStyle::style() const
@@ -214,7 +214,7 @@ void LVGLStyle::setStyle(lv_style_t *style)
 bool LVGLStyle::hasStyleChanged(const lv_style_t *style, const lv_style_t *base, LVGL::StyleParts parts)
 {
 	if (parts & LVGL::Body) {
-		if (style->body.main_color.full != base->body.main_color.full) return true;
+/*		if (style->body.main_color.full != base->body.main_color.full) return true;
 		else if (style->body.grad_color.full != base->body.grad_color.full) return true;
 		else if (style->body.radius != base->body.radius) return true;
 		else if (style->body.opa != base->body.opa) return true;
@@ -235,25 +235,25 @@ bool LVGLStyle::hasStyleChanged(const lv_style_t *style, const lv_style_t *base,
 			else if (style->body.padding.left != base->body.padding.left) return true;
 			else if (style->body.padding.right != base->body.padding.right) return true;
 			else if (style->body.padding.inner != base->body.padding.inner) return true;
-		}
+        }*/
 	}
 	if (parts & LVGL::Text) {
-		if (style->text.color.full != base->text.color.full) return true;
+/*		if (style->text.color.full != base->text.color.full) return true;
 		else if (style->text.sel_color.full != base->text.sel_color.full) return true;
 		else if (style->text.font != base->text.font) return true;
 		else if (style->text.letter_space != base->text.letter_space) return true;
 		else if (style->text.line_space != base->text.line_space) return true;
-		else if (style->text.opa != base->text.opa) return true;
+        else if (style->text.opa != base->text.opa) return true;*/
 	}
 	if (parts & LVGL::Image) {
-		if (style->image.color.full != base->image.color.full) return true;
+/*		if (style->image.color.full != base->image.color.full) return true;
 		else if (style->image.intense != base->image.intense) return true;
-		else if (style->image.opa != base->image.opa) return true;
+        else if (style->image.opa != base->image.opa) return true;*/
 	}
 	if (parts & LVGL::Line) {
-		if (style->line.color.full != base->line.color.full) return true;
+/*		if (style->line.color.full != base->line.color.full) return true;
 		else if (style->line.width != base->line.width) return true;
-		else if (style->line.opa != base->line.opa) return true;
+        else if (style->line.opa != base->line.opa) return true;*/
 	}
 	return false;
 }

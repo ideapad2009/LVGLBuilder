@@ -72,7 +72,7 @@ public:
 	LVGLStyle();
 
 	QVariant get(const LVGLStyleItem *item) const;
-	lv_border_part_t getBorderPart(const LVGLStyleItem *item) const;
+//	lv_border_part_t getBorderPart(const LVGLStyleItem *item) const;
 	void set(const LVGLStyleItem *item, QVariant value);
 
 	lv_style_t *style() const;

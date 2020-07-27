@@ -110,17 +110,18 @@ QStringList LVGLLine::styles() const
 
 lv_style_t *LVGLLine::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_line_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_line_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLLine::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_line_set_style(obj, static_cast<lv_bar_style_t>(type), style);
+//	lv_line_set_style(obj, static_cast<lv_bar_style_t>(type), style);
 }
 
 lv_style_t *LVGLLine::defaultStyle(int type) const
 {
-	if (type == LV_LINE_STYLE_MAIN)
-		return &lv_style_pretty;
+//	if (type == LV_LINE_STYLE_MAIN)
+//		return &lv_style_pretty;
 	return nullptr;
 }

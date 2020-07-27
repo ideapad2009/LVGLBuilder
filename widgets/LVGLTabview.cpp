@@ -17,7 +17,7 @@ public:
 	QString name() const { return "Button position"; }
 
 	QStringList function(LVGLObject *obj) const {
-		if (get(obj) != LV_TABVIEW_BTNS_POS_TOP)
+        if (get(obj) != LV_TABVIEW_TAB_POS_TOP)
 			return QStringList() << QString("lv_tabview_set_btns_pos(%1, %2);").arg(obj->codeName()).arg(m_values.at(get(obj)));
 		return QStringList();
 	}
@@ -59,8 +59,8 @@ protected:
 			name_dm[name.size()] = '\0';
 			ext->tab_name_ptr[i] = name_dm;
 
-			lv_btnm_set_map(ext->btns, ext->tab_name_ptr);
-			lv_btnm_set_btn_ctrl(ext->btns, ext->tab_cur, LV_BTNM_CTRL_NO_REPEAT);
+            lv_btnmatrix_set_map(ext->btns, ext->tab_name_ptr);
+            lv_btnmatrix_set_btn_ctrl(ext->btns, ext->tab_cur, LV_BTNMATRIX_CTRL_NO_REPEAT);
 		}
 
 		// add new
@@ -90,7 +90,7 @@ protected:
 	void set(LVGLObject *obj, int value) { lv_tabview_set_tab_act(obj->obj(), static_cast<uint16_t>(value), LV_ANIM_OFF); }
 };
 
-class LVGLPropertyTabBtnHide : public LVGLPropertyBool
+/*class LVGLPropertyTabBtnHide : public LVGLPropertyBool
 {
 public:
 	QString name() const { return "Hide buttons"; }
@@ -161,15 +161,15 @@ protected:
 	}
 
 	QStringList m_values;
-};
+};*/
 
 LVGLTabview::LVGLTabview()
 {
 	m_properties << new LVGLPropertyTabs;
 	m_properties << new LVGLPropertyTabBtnPos;
 	m_properties << new LVGLPropertyTabCurrent;
-	m_properties << new LVGLPropertyTabBtnHide;
-	m_properties << new LVGLPropertyTabSliding;
+//	m_properties << new LVGLPropertyTabBtnHide;
+//	m_properties << new LVGLPropertyTabSliding;
 	//m_properties << new LVGLPropertyTabScrollbars;
 
 	m_editableStyles << LVGL::Body; // LV_TABVIEW_STYLE_BG
@@ -230,17 +230,18 @@ QStringList LVGLTabview::styles() const
 
 lv_style_t *LVGLTabview::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_tabview_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_tabview_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLTabview::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_tabview_set_style(obj, static_cast<lv_tabview_style_t>(type), style);
+//	lv_tabview_set_style(obj, static_cast<lv_tabview_style_t>(type), style);
 }
 
 lv_style_t *LVGLTabview::defaultStyle(int type) const
 {
-	if (type == LV_TABVIEW_STYLE_BG)
+/*	if (type == LV_TABVIEW_STYLE_BG)
 		return &lv_style_plain;
 	else if (type == LV_TABVIEW_STYLE_INDIC)
 		return &lv_style_plain_color;
@@ -253,6 +254,6 @@ lv_style_t *LVGLTabview::defaultStyle(int type) const
 	else if (type == LV_TABVIEW_STYLE_BTN_TGL_REL)
 		return &lv_style_btn_tgl_rel;
 	else if (type == LV_TABVIEW_STYLE_BTN_TGL_PR)
-		return &lv_style_btn_tgl_pr;
+        return &lv_style_btn_tgl_pr;*/
 	return nullptr;
 }

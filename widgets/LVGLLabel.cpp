@@ -79,7 +79,7 @@ protected:
 	void set(LVGLObject *obj, bool boolean) { lv_label_set_recolor(obj->obj(), boolean); }
 };
 
-class LVGLPropertyLabelBodyDraw : public LVGLPropertyBool
+/*class LVGLPropertyLabelBodyDraw : public LVGLPropertyBool
 {
 public:
 	QString name() const { return "Body draw"; }
@@ -90,16 +90,16 @@ public:
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_label_get_body_draw(obj->obj()); }
-	void set(LVGLObject *obj, bool boolean) { lv_label_set_body_draw(obj->obj(), boolean); }
-};
+    bool get(LVGLObject *obj) const { return lv_label_get_body_draw(obj->obj()); }
+    void set(LVGLObject *obj, bool boolean) { lv_label_set_body_draw(obj->obj(), boolean); }
+};*/
 
 LVGLLabel::LVGLLabel()
 {
 	m_properties << new LVGLPropertyLabelAlign;
 	m_properties << new LVGLPropertyLabelLongMode;
 	m_properties << new LVGLPropertyLabelRecolor;
-	m_properties << new LVGLPropertyLabelBodyDraw;
+//	m_properties << new LVGLPropertyLabelBodyDraw;
 	m_properties << new LVGLPropertyLabelText;
 
 	// swap geometry in order to stop autosize
@@ -152,12 +152,13 @@ QStringList LVGLLabel::styles() const
 
 lv_style_t *LVGLLabel::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_label_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_label_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLLabel::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_label_set_style(obj, static_cast<lv_label_style_t>(type), style);
+//	lv_label_set_style(obj, static_cast<lv_label_style_t>(type), style);
 }
 
 lv_style_t *LVGLLabel::defaultStyle(int type) const

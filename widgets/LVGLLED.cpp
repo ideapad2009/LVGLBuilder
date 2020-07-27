@@ -73,17 +73,18 @@ QStringList LVGLLED::styles() const
 
 lv_style_t *LVGLLED::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_led_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_led_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLLED::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_led_set_style(obj, static_cast<lv_btn_style_t>(type), style);
+//	lv_led_set_style(obj, static_cast<lv_btn_style_t>(type), style);
 }
 
 lv_style_t *LVGLLED::defaultStyle(int type) const
 {
-	if (type == LV_LED_STYLE_MAIN)
-		return &lv_style_pretty_color;
+/*	if (type == LV_LED_STYLE_MAIN)
+        return &lv_style_pretty_color;*/
 	return nullptr;
 }

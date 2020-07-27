@@ -31,43 +31,43 @@ QWidget *LVGLPropertyAssignTextArea::editor(QWidget *parent)
 
 void LVGLPropertyAssignTextArea::updateEditor(LVGLObject *obj)
 {
-	LVGLObject *ta = lvgl.object(lv_kb_get_ta(obj->obj()));
+    LVGLObject *ta = lvgl.object(lv_keyboard_get_textarea(obj->obj()));
 	if (ta == nullptr)
 		m_widget->setCurrentIndex(0);
 	else
-		m_widget->setCurrentText(ta->name());
+        m_widget->setCurrentText(ta->name());
 }
 
 void LVGLPropertyAssignTextArea::updateWidget(LVGLObject *obj)
 {
-	LVGLObject *ta = lvgl.object(m_widget->currentText());
+    LVGLObject *ta = lvgl.object(m_widget->currentText());
 	if (ta)
-		lv_kb_set_ta(obj->obj(), ta->obj());
+        lv_keyboard_set_textarea(obj->obj(), ta->obj());
 	else
-		lv_kb_set_ta(obj->obj(), nullptr);
+        lv_keyboard_set_textarea(obj->obj(), nullptr);
 }
 
 QVariant LVGLPropertyAssignTextArea::value(LVGLObject *obj) const
 {
-	LVGLObject *ta = lvgl.object(lv_kb_get_ta(obj->obj()));
+    LVGLObject *ta = lvgl.object(lv_keyboard_get_textarea(obj->obj()));
 	if (ta == nullptr)
 		return "None";
 	else
-		return ta->name();
+        return ta->name();
 }
 
 void LVGLPropertyAssignTextArea::setValue(LVGLObject *obj, QVariant value)
 {
-	LVGLObject *ta = lvgl.object(value.toString());
+    LVGLObject *ta = lvgl.object(value.toString());
 	if (ta)
-		lv_kb_set_ta(obj->obj(), ta->obj());
+        lv_keyboard_set_textarea(obj->obj(), ta->obj());
 	else
-		lv_kb_set_ta(obj->obj(), nullptr);
+        lv_keyboard_set_textarea(obj->obj(), nullptr);
 }
 
 QStringList LVGLPropertyAssignTextArea::function(LVGLObject *obj) const
 {
-	LVGLObject *ta = lvgl.object(lv_kb_get_ta(obj->obj()));
+    LVGLObject *ta = lvgl.object(lv_keyboard_get_textarea(obj->obj()));
 	if (ta == nullptr) return QStringList();
-	return QStringList() << QString("lv_kb_set_ta(%1, %2);").arg(obj->codeName()).arg(ta->codeName());
+    return QStringList() << QString("lv_kb_set_ta(%1, %2);").arg(obj->codeName()).arg(ta->codeName());
 }

@@ -4,7 +4,7 @@
 #include "LVGLObject.h"
 #include "properties/LVGLPropertyList.h"
 
-class LVGLPropertyListSingleMode : public LVGLPropertyBool
+/*class LVGLPropertyListSingleMode : public LVGLPropertyBool
 {
 public:
 	QString name() const { return "Single mode"; }
@@ -14,9 +14,9 @@ public:
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_list_get_single_mode(obj->obj()); }
-	void set(LVGLObject *obj, bool boolean) { lv_list_set_single_mode(obj->obj(), boolean); }
-};
+    bool get(LVGLObject *obj) const { return lv_list_get_single_mode(obj->obj()); }
+    void set(LVGLObject *obj, bool boolean) { lv_list_set_single_mode(obj->obj(), boolean); }
+};*/
 
 class LVGLPropertyListScrollPropagation : public LVGLPropertyBool
 {
@@ -49,7 +49,7 @@ protected:
 LVGLList::LVGLList()
 {
 	m_properties << new LVGLPropertyList;
-	m_properties << new LVGLPropertyListSingleMode;
+//	m_properties << new LVGLPropertyListSingleMode;
 	m_properties << new LVGLPropertyListScrollPropagation;
 	m_properties << new LVGLPropertyListEdgeFlash;
 
@@ -114,17 +114,18 @@ QStringList LVGLList::styles() const
 
 lv_style_t *LVGLList::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_list_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_list_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLList::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_list_set_style(obj, static_cast<lv_list_style_t>(type), style);
+//	lv_list_set_style(obj, static_cast<lv_list_style_t>(type), style);
 }
 
 lv_style_t *LVGLList::defaultStyle(int type) const
 {
-	if (type == LV_LIST_STYLE_BG)
+/*	if (type == LV_LIST_STYLE_BG)
 		return &lv_style_transp_fit;
 	else if (type == LV_LIST_STYLE_SCRL)
 		return &lv_style_pretty;
@@ -139,6 +140,6 @@ lv_style_t *LVGLList::defaultStyle(int type) const
 	else if (type == LV_LIST_STYLE_BTN_TGL_PR)
 		return &lv_style_btn_tgl_pr;
 	else if (type == LV_LIST_STYLE_BTN_INA)
-		return &lv_style_btn_ina;
+        return &lv_style_btn_ina;*/
 	return nullptr;
 }

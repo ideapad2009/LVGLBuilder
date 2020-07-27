@@ -90,17 +90,18 @@ QStringList LVGLCalendar::styles() const
 
 lv_style_t *LVGLCalendar::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_calendar_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_calendar_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLCalendar::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_calendar_set_style(obj, static_cast<lv_bar_style_t>(type), style);
+//	lv_calendar_set_style(obj, static_cast<lv_bar_style_t>(type), style);
 }
 
 lv_style_t *LVGLCalendar::defaultStyle(int type) const
 {
-	if (type == LV_CALENDAR_STYLE_BG)
+/*	if (type == LV_CALENDAR_STYLE_BG)
 		return &lv_style_pretty;
 	else if (type == LV_CALENDAR_STYLE_HEADER)
 		return &lv_style_plain_color;
@@ -115,6 +116,6 @@ lv_style_t *LVGLCalendar::defaultStyle(int type) const
 	else if (type == LV_CALENDAR_STYLE_WEEK_BOX)
 		return &lv_style_plain_color;
 	else if (type == LV_CALENDAR_STYLE_TODAY_BOX)
-		return &lv_style_pretty_color;
+        return &lv_style_pretty_color;*/
 	return nullptr;
 }

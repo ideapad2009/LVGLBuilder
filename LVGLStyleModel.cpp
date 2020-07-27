@@ -165,7 +165,7 @@ LVGLBodyPartDialog::LVGLBodyPartDialog(QWidget *parent)
 	setLayout(layout1);
 }
 
-void LVGLBodyPartDialog::setBodyParts(lv_border_part_t parts)
+/*void LVGLBodyPartDialog::setBodyParts(lv_border_part_t parts)
 {
 	QListWidgetItem* item = nullptr;
 	for(int i = 0; i < m_list->count(); ++i) {
@@ -174,9 +174,9 @@ void LVGLBodyPartDialog::setBodyParts(lv_border_part_t parts)
 		if (parts & p)
 			item->setCheckState(Qt::Checked);
 	}
-}
+}*/
 
-lv_border_part_t LVGLBodyPartDialog::bodyParts() const
+/*lv_border_part_t LVGLBodyPartDialog::bodyParts() const
 {
 	QListWidgetItem* item = nullptr;
 	lv_border_part_t ret = 0;
@@ -186,7 +186,7 @@ lv_border_part_t LVGLBodyPartDialog::bodyParts() const
 			ret |= (uint8_t(1) << i);
 	}
 	return ret;
-}
+}*/
 
 LVGLStyleDelegate::LVGLStyleDelegate(LVGLStyle *styleBase, QObject *parent)
 	: QStyledItemDelegate(parent)
@@ -241,10 +241,10 @@ void LVGLStyleDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
 		QComboBox *widget = qobject_cast<QComboBox*>(editor);
 		QString f = m_styleBase->get(item).toString();
 		widget->setCurrentIndex(lvgl.fontNames().indexOf(f));
-	} else if (item->type()== LVGLStyleItem::BorderPart) {
-		LVGLBodyPartDialog *dialog = qobject_cast<LVGLBodyPartDialog*>(editor);
-		dialog->setBodyParts(m_styleBase->getBorderPart(item));
-	}
+//	} else if (item->type()== LVGLStyleItem::BorderPart) {
+//		LVGLBodyPartDialog *dialog = qobject_cast<LVGLBodyPartDialog*>(editor);
+//		dialog->setBodyParts(m_styleBase->getBorderPart(item));
+    }
 }
 
 void LVGLStyleDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
@@ -275,7 +275,7 @@ void LVGLStyleDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
 	} else if (item->type()== LVGLStyleItem::BorderPart) {
 		LVGLBodyPartDialog *dialog = qobject_cast<LVGLBodyPartDialog*>(editor);
 		if (dialog->result() == QDialog::Accepted) {
-			m_styleBase->set(item, dialog->bodyParts());
+//			m_styleBase->set(item, dialog->bodyParts());
 			emit m->styleChanged();
 			emit m->dataChanged(index, index);
 		}

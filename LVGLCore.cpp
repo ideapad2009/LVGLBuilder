@@ -41,7 +41,7 @@ void LVGLCore::init(int width, int height)
 	lv_disp_drv_init(&m_dispDrv);
 	m_dispDrv.hor_res = static_cast<lv_coord_t>(width);
 	m_dispDrv.ver_res = static_cast<lv_coord_t>(height);
-	m_dispDrv.user_data = this;
+    m_dispDrv.user_data = this;
 	m_dispDrv.flush_cb = flushCb;
 	m_dispDrv.buffer = &m_dispBuf;
 	lv_disp_drv_register(&m_dispDrv);
@@ -53,13 +53,13 @@ void LVGLCore::init(int width, int height)
 	lv_indev_drv_init(&indev_drv);
 	indev_drv.type = LV_INDEV_TYPE_POINTER;
 	indev_drv.read_cb = inputCb;
-	indev_drv.user_data = this;
+    indev_drv.user_data = this;
 	lv_indev_drv_register(&indev_drv);
 
 	QImage pix(":/images/littlevgl_logo.png");
 	m_default = lvgl.addImage(pix, "default");
 
-	lv_style_copy(&m_screenStyle, &lv_style_scr);
+//    lv_style_copy(&m_screenStyle, &lv_style_scr);
 
 #if LV_FONT_ROBOTO_12
 	m_fonts << new LVGLFontData("Roboto 12", "lv_font_roboto_12", 12, &lv_font_roboto_12);
@@ -77,13 +77,21 @@ void LVGLCore::init(int width, int height)
 	m_fonts << new LVGLFontData("UNSCII 8", "lv_font_unscii_8", 8, &lv_font_unscii_8);
 #endif
 
+#if LV_FONT_MONTSERRAT_12
+    m_fonts << new LVGLFontData("Montserrat 12", "lv_font_montserrat_12", 12, &lv_font_montserrat_12);
+#endif
+
+#if LV_FONT_MONTSERRAT_14
+    m_fonts << new LVGLFontData("Montserrat 14", "lv_font_montserrat_14", 14, &lv_font_montserrat_14);
+#endif
+
 	// search for default font name
 	for (const LVGLFontData *f:m_fonts) {
-		if (f->font() == LV_FONT_DEFAULT) {
-			m_defaultFont = f;
+        if (f->font() == LV_THEME_DEFAULT_FONT_NORMAL) {
+            m_defaultFont = f;
 			break;
-		}
-	}
+        }
+    }
 	Q_ASSERT(m_defaultFont != nullptr);
 
 	addWidget(new LVGLBar);
@@ -91,26 +99,26 @@ void LVGLCore::init(int width, int height)
 	addWidget(new LVGLButtonMatrix);
 	addWidget(new LVGLCalendar);
 	addWidget(new LVGLCanvas);
-	addWidget(new LVGLChart);
+    addWidget(new LVGLChart);
 	addWidget(new LVGLCheckBox);
-	addWidget(new LVGLColorPicker);
+    addWidget(new LVGLColorPicker);
 	addWidget(new LVGLContainer);
-	addWidget(new LVGLDropDownList);
+//    addWidget(new LVGLDropDownList);
 	addWidget(new LVGLGauge);
 	addWidget(new LVGLImage);
-	addWidget(new LVGLImageButton);
-	addWidget(new LVGLImageSlider);
-	addWidget(new LVGLKeyboard);
+    addWidget(new LVGLImageButton);
+//    addWidget(new LVGLImageSlider); //Gone from v7.x
+    addWidget(new LVGLKeyboard);
 	addWidget(new LVGLLabel);
 	addWidget(new LVGLLED);
 	addWidget(new LVGLLine);
 	addWidget(new LVGLList);
-	addWidget(new LVGLPage);
-	addWidget(new LVGLPreloader);
-	addWidget(new LVGLSlider);
-	addWidget(new LVGLSwitch);
-	addWidget(new LVGLTabview);
-	addWidget(new LVGLTextArea);
+    addWidget(new LVGLPage);
+    addWidget(new LVGLPreloader);
+    addWidget(new LVGLSlider);
+    addWidget(new LVGLSwitch);
+    addWidget(new LVGLTabview);
+    addWidget(new LVGLTextArea);
 
 	//lv_log_register_print_cb(logCb);
 }
@@ -407,7 +415,7 @@ const char *LVGLCore::symbol(const QString &name) const
 
 void LVGLCore::poll()
 {
-	lv_task_handler();
+    lv_task_handler();
 	lv_tick_inc(static_cast<uint32_t>(m_time.elapsed()));
 	m_time.restart();
 }
@@ -687,7 +695,7 @@ void LVGLCore::removeCustomFonts()
 
 QString LVGLCore::baseStyleName(const lv_style_t *style) const
 {
-	if (style == &lv_style_scr)
+/*	if (style == &lv_style_scr)
 		return "lv_style_scr";
 	else if (style == &lv_style_transp)
 		return "lv_style_transp";
@@ -712,26 +720,28 @@ QString LVGLCore::baseStyleName(const lv_style_t *style) const
 	else if (style == &lv_style_btn_tgl_pr)
 		return "lv_style_btn_tgl_pr";
 	else if (style == &lv_style_btn_ina)
-		return "lv_style_btn_ina";
+        return "lv_style_btn_ina";*/
 	return  "";
 }
 
 void LVGLCore::setScreenColor(QColor color)
 {
-	m_screenStyle.body.main_color = fromColor(color);
-	m_screenStyle.body.grad_color = m_screenStyle.body.main_color;
-	lv_obj_set_style(lv_scr_act(), &m_screenStyle);
+//	m_screenStyle.body.main_color = fromColor(color);
+//	m_screenStyle.body.grad_color = m_screenStyle.body.main_color;
+//	lv_obj_set_style(lv_scr_act(), &m_screenStyle);
 }
 
 QColor LVGLCore::screenColor() const
 {
-	return toColor(m_screenStyle.body.main_color);
+    return QColor().red();
+//	return toColor(m_screenStyle.body.main_color);
 }
 
 bool LVGLCore::screenColorChanged() const
 {
-	return (m_screenStyle.body.main_color.full != lv_style_scr.body.main_color.full &&
-			m_screenStyle.body.grad_color.full != lv_style_scr.body.grad_color.full);
+    return 1;
+//	return (m_screenStyle.body.main_color.full != lv_style_scr.body.main_color.full &&
+//			m_screenStyle.body.grad_color.full != lv_style_scr.body.grad_color.full);
 }
 
 QList<const LVGLWidget *> LVGLCore::widgets() const
@@ -762,7 +772,7 @@ void LVGLCore::flushHandler(lv_disp_drv_t *disp, const lv_area_t *area, lv_color
 	const auto stride = disp->hor_res;
 	for (auto y = area->y1; y <= area->y2; ++y) {
 		for (auto x = area->x1; x <= area->x2; ++x) {
-			m_dispFrameBuf[x + y * stride].full = color_p->full;
+            m_dispFrameBuf[x + y * stride].full = color_p->full;
 			color_p++;
 		}
 	}
@@ -782,14 +792,14 @@ bool LVGLCore::inputHandler(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 
 void LVGLCore::flushCb(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
-	LVGLCore *self = reinterpret_cast<LVGLCore*>(disp->user_data);
-	self->flushHandler(disp, area, color_p);
+    LVGLCore *self = reinterpret_cast<LVGLCore*>(disp->user_data);
+    self->flushHandler(disp, area, color_p);
 }
 
 bool LVGLCore::inputCb(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
-	LVGLCore *self = reinterpret_cast<LVGLCore*>(indev_driver->user_data);
-	return self->inputHandler(indev_driver, data);
+    LVGLCore *self = reinterpret_cast<LVGLCore*>(indev_driver->user_data);
+    return self->inputHandler(indev_driver, data);
 }
 
 void LVGLCore::logCb(lv_log_level_t level, const char *file, uint32_t line, const char *dsc)

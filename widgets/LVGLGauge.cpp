@@ -92,17 +92,18 @@ QStringList LVGLGauge::styles() const
 
 lv_style_t *LVGLGauge::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_gauge_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_gauge_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLGauge::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_gauge_set_style(obj, static_cast<lv_gauge_style_t>(type), style);
+//	lv_gauge_set_style(obj, static_cast<lv_gauge_style_t>(type), style);
 }
 
 lv_style_t *LVGLGauge::defaultStyle(int type) const
 {
-	if (type == LV_GAUGE_STYLE_MAIN)
-		return &lv_style_pretty_color;
+/*	if (type == LV_GAUGE_STYLE_MAIN)
+        return &lv_style_pretty_color;*/
 	return nullptr;
 }

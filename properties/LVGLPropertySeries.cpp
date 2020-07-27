@@ -213,7 +213,7 @@ void LVGLPropertySeries::updateEditor(LVGLObject *obj)
 
 	lv_chart_series_t *ser;
 	size_t i = 1;
-	for (ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_tail(&ext->series_ll));
+/*	for (ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_tail(&ext->series_ll));
 		  ser != nullptr;
 		  ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_prev(&ext->series_ll, ser)), ++i)
 	{
@@ -224,7 +224,7 @@ void LVGLPropertySeries::updateEditor(LVGLObject *obj)
 			series.points << ser->points[j];
 		m_widget->m_series << series;
 		m_widget->m_seriesList->addItem(QString("Series %1").arg(i));
-	}
+    }*/
 }
 
 void LVGLPropertySeries::updateWidget(LVGLObject *obj)
@@ -240,14 +240,14 @@ void LVGLPropertySeries::updateWidget(LVGLObject *obj)
 
 	// clear the chart series (maybe lvgl should add a function for this)
 	lv_chart_series_t *ser;
-	for (ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_tail(&ext->series_ll));
+/*	for (ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_tail(&ext->series_ll));
 		  ser != nullptr;
 		  ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_prev(&ext->series_ll, ser)))
 	{
 		lv_mem_free(ser->points);
 		lv_mem_free(ser);
 	}
-	lv_ll_clear(&ext->series_ll);
+    lv_ll_clear(&ext->series_ll);*/
 
 	// add new charts
 	lv_chart_set_point_count(chart, static_cast<uint16_t>(maxPoints));
@@ -267,7 +267,7 @@ QStringList LVGLPropertySeries::function(LVGLObject *obj) const
 
 	lv_chart_ext_t *ext = reinterpret_cast<lv_chart_ext_t*>(lv_obj_get_ext_attr(chart));
 
-	lv_chart_series_t *ser;
+/*	lv_chart_series_t *ser;
 	size_t i = 1;
 	for (ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_tail(&ext->series_ll));
 		  ser != nullptr;
@@ -280,7 +280,7 @@ QStringList LVGLPropertySeries::function(LVGLObject *obj) const
 		for (uint16_t j = 0; j < ctx; ++j)
 			ret << QString("lv_chart_set_next(%1, %2, %3);").arg(obj->codeName()).arg(codeSerName).arg(ser->points[j]);
 		ret << "";
-	}
+    }*/
 	return ret;
 }
 
@@ -293,7 +293,7 @@ QJsonValue LVGLPropertySeries::toJson(LVGLObject *obj) const
 
 	lv_chart_ext_t *ext = reinterpret_cast<lv_chart_ext_t*>(lv_obj_get_ext_attr(chart));
 
-	lv_chart_series_t *ser;
+/*	lv_chart_series_t *ser;
 	for (ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_tail(&ext->series_ll));
 		  ser != nullptr;
 		  ser = reinterpret_cast<lv_chart_series_t*>(lv_ll_get_prev(&ext->series_ll, ser)))
@@ -305,7 +305,7 @@ QJsonValue LVGLPropertySeries::toJson(LVGLObject *obj) const
 		QJsonObject series({{"color", lvgl.colorToJson(ser->color)},
 								  {"values", values}});
 		ret.append(series);
-	}
+    }*/
 	return ret;
 }
 

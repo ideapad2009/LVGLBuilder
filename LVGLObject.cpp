@@ -232,7 +232,7 @@ QJsonArray LVGLObject::jsonStyles() const
 			style.insert("base", baseStyle);
 
 		if (editableParts & LVGL::Body) {
-			QJsonObject body;
+/*			QJsonObject body;
 			if (!defaultStyle || (defaultStyle->body.main_color.full != objStyle.body.main_color.full))
 				body.insert("main_color", QVariant(lvgl.toColor(objStyle.body.main_color)).toString());
 			if (!defaultStyle || (defaultStyle->body.grad_color.full != objStyle.body.grad_color.full))
@@ -284,11 +284,11 @@ QJsonArray LVGLObject::jsonStyles() const
 					body.insert("padding", padding);
 			}
 			if (!body.isEmpty())
-				style.insert("body", body);
+                style.insert("body", body);*/
 		}
 
 		if (editableParts & LVGL::Text) {
-			QJsonObject text;
+/*			QJsonObject text;
 			if (!defaultStyle || (defaultStyle->text.color.full != objStyle.text.color.full))
 				text.insert("color", QVariant(lvgl.toColor(objStyle.text.color)).toString());
 			if (!defaultStyle || (defaultStyle->text.sel_color.full != objStyle.text.sel_color.full))
@@ -302,11 +302,11 @@ QJsonArray LVGLObject::jsonStyles() const
 			if (!defaultStyle || (defaultStyle->text.opa != objStyle.text.opa))
 				text.insert("opa", objStyle.text.opa);
 			if (!text.isEmpty())
-				style.insert("text", text);
+                style.insert("text", text);*/
 		}
 
 		if (editableParts & LVGL::Image) {
-			QJsonObject image;
+/*			QJsonObject image;
 			if (!defaultStyle || (defaultStyle->image.color.full != objStyle.image.color.full))
 				image.insert("color", QVariant(lvgl.toColor(objStyle.image.color)).toString());
 			if (!defaultStyle || (defaultStyle->image.intense != objStyle.image.intense))
@@ -314,11 +314,11 @@ QJsonArray LVGLObject::jsonStyles() const
 			if (!defaultStyle || (defaultStyle->image.opa != objStyle.image.opa))
 				image.insert("opa", objStyle.image.opa);
 			if (!image.isEmpty())
-				style.insert("image", image);
+                style.insert("image", image);*/
 		}
 
 		if (editableParts & LVGL::Line) {
-			QJsonObject line;
+/*			QJsonObject line;
 			if (!defaultStyle || (defaultStyle->line.color.full != objStyle.line.color.full))
 				line.insert("color", QVariant(lvgl.toColor(objStyle.line.color)).toString());
 			if (!defaultStyle || (defaultStyle->line.width != objStyle.line.width))
@@ -326,7 +326,7 @@ QJsonArray LVGLObject::jsonStyles() const
 			if (!defaultStyle || (defaultStyle->line.opa != objStyle.line.opa))
 				line.insert("opa", objStyle.image.opa);
 			if (!line.isEmpty())
-				style.insert("line", line);
+                style.insert("line", line);*/
 		}
 
 		if (style.size() > 0)
@@ -349,7 +349,7 @@ QStringList LVGLObject::codeStyle(QString styleVar, int type) const
 		return ret;
 
 	if (editableParts & LVGL::Body) {
-		if (!defaultStyle || (defaultStyle->body.main_color.full != objStyle.body.main_color.full)) {
+/*		if (!defaultStyle || (defaultStyle->body.main_color.full != objStyle.body.main_color.full)) {
 			QString color = QVariant(lvgl.toColor(objStyle.body.main_color)).toString().replace("#", "0x");
 			ret << styleVar + ".body.main_color = lv_color_hex(" + color + ");";
 		}
@@ -399,11 +399,11 @@ QStringList LVGLObject::codeStyle(QString styleVar, int type) const
 				ret << styleVar + ".body.padding.right = " + QString::number(objStyle.body.padding.right) + ";";
 			if (!defaultStyle || (defaultStyle->body.padding.inner != objStyle.body.padding.inner))
 				ret << styleVar + ".body.padding.inner = " + QString::number(objStyle.body.padding.inner) + ";";
-		}
+        }*/
 	}
 
 	if (editableParts & LVGL::Text) {
-		if (!defaultStyle || (defaultStyle->text.color.full != objStyle.text.color.full)) {
+/*		if (!defaultStyle || (defaultStyle->text.color.full != objStyle.text.color.full)) {
 			QString color = QVariant(lvgl.toColor(objStyle.text.color)).toString().replace("#", "0x");
 			ret << styleVar + ".text.color = lv_color_hex(" + color + ");";
 		}
@@ -418,29 +418,29 @@ QStringList LVGLObject::codeStyle(QString styleVar, int type) const
 		if (!defaultStyle || (defaultStyle->text.line_space != objStyle.text.letter_space))
 			ret << styleVar + ".text.line_space = " + QString::number(objStyle.text.line_space) + ";";
 		if (!defaultStyle || (defaultStyle->text.opa != objStyle.text.opa))
-			ret << styleVar + ".text.opa = " + QString::number(objStyle.text.opa) + ";";
+            ret << styleVar + ".text.opa = " + QString::number(objStyle.text.opa) + ";";*/
 	}
 
 	if (editableParts & LVGL::Image) {
-		if (!defaultStyle || (defaultStyle->image.color.full != objStyle.image.color.full)) {
+/*		if (!defaultStyle || (defaultStyle->image.color.full != objStyle.image.color.full)) {
 			QString color = QVariant(lvgl.toColor(objStyle.image.color)).toString().replace("#", "0x");
 			ret << styleVar + ".image.color = lv_color_hex(" + color + ");";
 		}
 		if (!defaultStyle || (defaultStyle->image.intense != objStyle.image.intense))
 			ret << styleVar + ".image.intense = " + QString::number(objStyle.image.intense) + ";";
 		if (!defaultStyle || (defaultStyle->image.opa != objStyle.image.opa))
-			ret << styleVar + ".image.opa = " + QString::number(objStyle.image.opa) + ";";
+            ret << styleVar + ".image.opa = " + QString::number(objStyle.image.opa) + ";";*/
 	}
 
 	if (editableParts & LVGL::Line) {
-		if (!defaultStyle || (defaultStyle->line.color.full != objStyle.line.color.full)) {
+/*		if (!defaultStyle || (defaultStyle->line.color.full != objStyle.line.color.full)) {
 			QString color = QVariant(lvgl.toColor(objStyle.line.color)).toString().replace("#", "0x");
 			ret << styleVar + ".line.color = lv_color_hex(" + color + ");";
 		}
 		if (!defaultStyle || (defaultStyle->line.width != objStyle.line.width))
 			ret << styleVar + ".line.width = " + QString::number(objStyle.line.width) + ";";
 		if (!defaultStyle || (defaultStyle->line.opa != objStyle.line.opa))
-			ret << styleVar + ".line.opa = " + QString::number(objStyle.line.opa) + ";";
+            ret << styleVar + ".line.opa = " + QString::number(objStyle.line.opa) + ";";*/
 	}
 
 	return ret;
@@ -458,46 +458,46 @@ void LVGLObject::parseStyles(const QJsonArray &styles)
 			QJsonObject body = style["body"].toObject();
 			if (body.contains("main_color")) {
 				const QColor c = QVariant(body["main_color"].toString()).value<QColor>();
-				objStyle->body.main_color = lvgl.fromColor(c);
+//				objStyle->body.main_color = lvgl.fromColor(c);
 			}
 			if (body.contains("grad_color")) {
 				const QColor c = QVariant(body["grad_color"].toString()).value<QColor>();
-				objStyle->body.grad_color = lvgl.fromColor(c);
+//				objStyle->body.grad_color = lvgl.fromColor(c);
 			}
-			if (body.contains("radius"))
-				objStyle->body.radius = static_cast<lv_coord_t>(body["radius"].toInt());
-			if (body.contains("opa"))
-				objStyle->body.opa = static_cast<lv_opa_t>(body["opa"].toInt());
+//			if (body.contains("radius"))
+//				objStyle->body.radius = static_cast<lv_coord_t>(body["radius"].toInt());
+//			if (body.contains("opa"))
+//				objStyle->body.opa = static_cast<lv_opa_t>(body["opa"].toInt());
 
 			if (body.contains("border")) {
 				QJsonObject border = body["border"].toObject();
 				if (border.contains("color")) {
 					const QColor c = QVariant(border["color"].toString()).value<QColor>();
-					objStyle->body.border.color = lvgl.fromColor(c);
+//					objStyle->body.border.color = lvgl.fromColor(c);
 				}
-				if (border.contains("width"))
+/*				if (border.contains("width"))
 					objStyle->body.border.width = static_cast<lv_coord_t>(border["width"].toInt());
 				if (border.contains("part"))
 					objStyle->body.border.part = static_cast<lv_border_part_t>(border["part"].toInt());
 				if (border.contains("opa"))
-					objStyle->body.border.opa = static_cast<lv_opa_t>(border["opa"].toInt());
+                    objStyle->body.border.opa = static_cast<lv_opa_t>(border["opa"].toInt());*/
 			}
 
 			if (body.contains("shadow")) {
 				QJsonObject shadow = body["shadow"].toObject();
 				if (shadow.contains("color")) {
 					const QColor c = QVariant(shadow["color"].toString()).value<QColor>();
-					objStyle->body.shadow.color = lvgl.fromColor(c);
+//					objStyle->body.shadow.color = lvgl.fromColor(c);
 				}
-				if (shadow.contains("width"))
+/*				if (shadow.contains("width"))
 					objStyle->body.shadow.width = static_cast<lv_coord_t>(shadow["width"].toInt());
 				if (shadow.contains("type"))
-					objStyle->body.shadow.type = static_cast<lv_shadow_type_t>(shadow["type"].toInt());
+                    objStyle->body.shadow.type = static_cast<lv_shadow_type_t>(shadow["type"].toInt());*/
 			}
 
 			if (body.contains("padding")) {
 				QJsonObject padding = body["padding"].toObject();
-				if (padding.contains("top"))
+/*				if (padding.contains("top"))
 					objStyle->body.padding.top = static_cast<lv_coord_t>(padding["top"].toInt());
 				if (padding.contains("bottom"))
 					objStyle->body.padding.bottom = static_cast<lv_coord_t>(padding["bottom"].toInt());
@@ -506,54 +506,54 @@ void LVGLObject::parseStyles(const QJsonArray &styles)
 				if (padding.contains("right"))
 					objStyle->body.padding.right = static_cast<lv_coord_t>(padding["right"].toInt());
 				if (padding.contains("inner"))
-					objStyle->body.padding.inner = static_cast<lv_coord_t>(padding["inner"].toInt());
+                    objStyle->body.padding.inner = static_cast<lv_coord_t>(padding["inner"].toInt());*/
 			}
 		}
 		if (style.contains("text")) {
 			QJsonObject text = style["text"].toObject();
 			if (text.contains("color")) {
 				const QColor c = QVariant(text["color"].toString()).value<QColor>();
-				objStyle->text.color = lvgl.fromColor(c);
+//				objStyle->text.color = lvgl.fromColor(c);
 			}
 			if (text.contains("sel_color")) {
 				const QColor c = QVariant(text["sel_color"].toString()).value<QColor>();
-				objStyle->text.sel_color = lvgl.fromColor(c);
+//				objStyle->text.sel_color = lvgl.fromColor(c);
 			}
 			if (text.contains("font")) {
 				const QString fontName = text["font"].toString();
 				const lv_font_t *f = lvgl.font(fontName);
-				objStyle->text.font = f;
+//				objStyle->text.font = f;
 			}
-			if (text.contains("line_space"))
+/*			if (text.contains("line_space"))
 				objStyle->text.line_space = static_cast<lv_coord_t>(text["line_space"].toInt());
 			if (text.contains("letter_space"))
 				objStyle->text.letter_space = static_cast<lv_coord_t>(text["letter_space"].toInt());
 			if (text.contains("opa"))
-				objStyle->text.opa = static_cast<lv_opa_t>(text["opa"].toInt());
+                objStyle->text.opa = static_cast<lv_opa_t>(text["opa"].toInt());*/
 		}
 
 		if (style.contains("image")) {
 			QJsonObject image = style["image"].toObject();
 			if (image.contains("color")) {
 				const QColor c = QVariant(image["color"].toString()).value<QColor>();
-				objStyle->image.color = lvgl.fromColor(c);
+//				objStyle->image.color = lvgl.fromColor(c);
 			}
-			if (image.contains("intense"))
-				objStyle->image.intense = static_cast<lv_opa_t>(image["intense"].toInt());
-			if (image.contains("opa"))
-				objStyle->image.opa = static_cast<lv_opa_t>(image["opa"].toInt());
+//			if (image.contains("intense"))
+//				objStyle->image.intense = static_cast<lv_opa_t>(image["intense"].toInt());
+//			if (image.contains("opa"))
+//				objStyle->image.opa = static_cast<lv_opa_t>(image["opa"].toInt());
 		}
 
 		if (style.contains("line")) {
 			QJsonObject line = style["line"].toObject();
 			if (line.contains("color")) {
 				const QColor c = QVariant(line["color"].toString()).value<QColor>();
-				objStyle->line.color = lvgl.fromColor(c);
+//				objStyle->line.color = lvgl.fromColor(c);
 			}
-			if (line.contains("width"))
-				objStyle->line.width = static_cast<lv_opa_t>(line["width"].toInt());
-			if (line.contains("opa"))
-				objStyle->line.opa = static_cast<lv_opa_t>(line["opa"].toInt());
+//			if (line.contains("width"))
+//				objStyle->line.width = static_cast<lv_opa_t>(line["width"].toInt());
+//			if (line.contains("opa"))
+//				objStyle->line.opa = static_cast<lv_opa_t>(line["opa"].toInt());
 		}
 		m_widgetClass->setStyle(m_obj, type, objStyle);
 	}
@@ -579,13 +579,12 @@ lv_style_t *LVGLObject::style(int type)
 	// first check default fonts
 	lv_style_t *doner = m_widgetClass->defaultStyle(type);
 	if (doner == nullptr) doner = m_widgetClass->style(m_obj, type);
-	if (doner == nullptr) doner = &lv_style_plain;
+//	if (doner == nullptr) doner = &lv_style_plain;
 	//lv_style_t *doner = m_widgetType->style(m_obj, type);
 	// security check
-	Q_ASSERT(doner != nullptr);
+//	Q_ASSERT(doner != nullptr);
 
-
-	lv_style_copy(s, doner);
+//	lv_style_copy(s, doner);
 	return s;
 }
 

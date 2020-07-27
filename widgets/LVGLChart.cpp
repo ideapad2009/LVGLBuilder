@@ -13,7 +13,7 @@ public:
 	LVGLPropertyChartType()
 		: LVGLPropertyFlags({"None", "Line", "Columns", "Points", "Area", "Vertical lines"},
 								  {"LV_CHART_TYPE_NONE", "LV_CHART_TYPE_LINE", "LV_CHART_TYPE_COLUMN", "LV_CHART_TYPE_POINT", "LV_CHART_TYPE_AREA", "LV_CHART_TYPE_VERTICAL_LINE"},
-								  {LV_CHART_TYPE_NONE, LV_CHART_TYPE_LINE, LV_CHART_TYPE_COLUMN, LV_CHART_TYPE_POINT, LV_CHART_TYPE_AREA, LV_CHART_TYPE_VERTICAL_LINE})
+                                  {LV_CHART_TYPE_NONE, LV_CHART_TYPE_LINE, LV_CHART_TYPE_COLUMN, LV_CHART_TYPE_SCATTER, LV_CHART_TYPE_COLUMN, LV_CHART_TYPE_LINE})
 	{}
 
 	QString name() const { return "Type"; }
@@ -38,12 +38,12 @@ public:
 	}
 
 protected:
-	int getMin(LVGLObject *obj) const override {
-		return reinterpret_cast<lv_chart_ext_t*>(lv_obj_get_ext_attr(obj->obj()))->ymin;
+/*	int getMin(LVGLObject *obj) const override {
+        return reinterpret_cast<lv_chart_ext_t*>(lv_obj_get_ext_attr(obj->obj()))->ymin;
 	}
 	int getMax(LVGLObject *obj) const override {
 		return reinterpret_cast<lv_chart_ext_t*>(lv_obj_get_ext_attr(obj->obj()))->ymax;
-	}
+    }*/
 	void set(LVGLObject *obj, int min, int max) override {
 		lv_chart_set_range(obj->obj(), static_cast<lv_coord_t>(min), static_cast<lv_coord_t>(max));
 	}
@@ -86,7 +86,7 @@ protected:
 
 };
 
-class LVGLPropertyChartWidth : public LVGLPropertyCoord
+/*class LVGLPropertyChartWidth : public LVGLPropertyCoord
 {
 public:
 	LVGLPropertyChartWidth(LVGLProperty *p) : LVGLPropertyCoord(p) {}
@@ -97,9 +97,9 @@ protected:
 	virtual lv_coord_t get(LVGLObject *obj) const override { return lv_chart_get_series_width(obj->obj()); }
 	virtual void set(LVGLObject *obj, lv_coord_t value) override { lv_chart_set_series_width(obj->obj(), value); }
 
-};
+};*/
 
-class LVGLPropertyChartOpa : public LVGLPropertyInt
+/*class LVGLPropertyChartOpa : public LVGLPropertyInt
 {
 public:
 	LVGLPropertyChartOpa(LVGLProperty *p) : LVGLPropertyInt(0, 255, p) {}
@@ -110,9 +110,9 @@ protected:
 	virtual int get(LVGLObject *obj) const override { return lv_chart_get_series_opa(obj->obj()); }
 	virtual void set(LVGLObject *obj, int value) override { lv_chart_set_series_opa(obj->obj(), static_cast<lv_opa_t>(value)); }
 
-};
+};*/
 
-class LVGLPropertyChartDarking : public LVGLPropertyInt
+/*class LVGLPropertyChartDarking : public LVGLPropertyInt
 {
 public:
 	LVGLPropertyChartDarking(LVGLProperty *p) : LVGLPropertyInt(0, 255, p) {}
@@ -153,16 +153,16 @@ protected:
 	virtual int get(LVGLObject *obj) const override { return lv_chart_get_margin(obj->obj()); }
 	virtual void set(LVGLObject *obj, int value) override { lv_chart_set_margin(obj->obj(), static_cast<uint16_t>(value)); }
 
-};
+};*/
 
 LVGLChart::LVGLChart()
 {
 	m_properties << new LVGLPropertyChartType;
-	m_properties << new LVGLPropertyChartRange;
+//	m_properties << new LVGLPropertyChartRange;
 	m_properties << new LVGLPropertyChartXDiv;
 	m_properties << new LVGLPropertyChartYDiv;
-	m_properties << new LVGLPropertyChartSeries;
-	m_properties << new LVGLPropertyChartMargin;
+//	m_properties << new LVGLPropertyChartSeries;
+//	m_properties << new LVGLPropertyChartMargin;
 	m_properties << new LVGLPropertySeries;
 
 	m_editableStyles << LVGL::StyleParts(LVGL::Body | LVGL::Line | LVGL::Text); // LV_CHART_STYLE_MAIN
@@ -211,17 +211,19 @@ QStringList LVGLChart::styles() const
 
 lv_style_t *LVGLChart::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_chart_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_chart_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLChart::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_chart_set_style(obj, static_cast<lv_btn_style_t>(type), style);
+//	lv_chart_set_style(obj, static_cast<lv_btn_style_t>(type), style);
 }
 
 lv_style_t *LVGLChart::defaultStyle(int type) const
 {
-	if (type == LV_CHART_STYLE_MAIN)
-		return &lv_style_pretty;
+//	if (type == LV_CHART_STYLE_MAIN)
+//		return &lv_style_pretty;
 	return nullptr;
 }
+

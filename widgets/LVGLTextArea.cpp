@@ -9,12 +9,12 @@ public:
 	QString name() const { return "Text"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_text(%1, \"%2\");").arg(obj->codeName()).arg(get(obj));
+        return QStringList() << QString("lv_textarea_set_text(%1, \"%2\");").arg(obj->codeName()).arg(get(obj));
 	}
 
 protected:
-	QString get(LVGLObject *obj) const { return lv_ta_get_text(obj->obj()); }
-	void set(LVGLObject *obj, QString string) { lv_ta_set_text(obj->obj(), qPrintable(string)); }
+    QString get(LVGLObject *obj) const { return lv_textarea_get_text(obj->obj()); }
+    void set(LVGLObject *obj, QString string) { lv_textarea_set_text(obj->obj(), qPrintable(string)); }
 };
 
 class LVGLPropertyTAPlaceholder : public LVGLPropertyString
@@ -23,27 +23,27 @@ public:
 	QString name() const { return "Placeholder"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_placeholder_text(%1, \"%2\");").arg(obj->codeName()).arg(get(obj));
+        return QStringList() << QString("lv_textarea_set_placeholder_text(%1, \"%2\");").arg(obj->codeName()).arg(get(obj));
 	}
 
 protected:
-	QString get(LVGLObject *obj) const { return lv_ta_get_placeholder_text(obj->obj()); }
-	void set(LVGLObject *obj, QString string) { lv_ta_set_placeholder_text(obj->obj(), qPrintable(string)); }
+    QString get(LVGLObject *obj) const { return lv_textarea_get_placeholder_text(obj->obj()); }
+    void set(LVGLObject *obj, QString string) { lv_textarea_set_placeholder_text(obj->obj(), qPrintable(string)); }
 };
 
 class LVGLPropertyTACursorPos : public LVGLPropertyInt
 {
 public:
-	LVGLPropertyTACursorPos() : LVGLPropertyInt(0, LV_TA_CURSOR_LAST) {}
+    LVGLPropertyTACursorPos() : LVGLPropertyInt(0, LV_TEXTAREA_CURSOR_LAST) {}
 
 	QString name() const { return "Cursor position"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_ta_get_cursor_pos(obj->obj()); }
-	void set(LVGLObject *obj, int value) { lv_ta_set_cursor_pos(obj->obj(), static_cast<int16_t>(value)); }
+    int get(LVGLObject *obj) const { return lv_textarea_get_cursor_pos(obj->obj()); }
+    void set(LVGLObject *obj, int value) { lv_textarea_set_cursor_pos(obj->obj(), static_cast<int16_t>(value)); }
 };
 
-class LVGLPropertyTACursorType : public LVGLPropertyEnum
+/*class LVGLPropertyTACursorType : public LVGLPropertyEnum
 {
 public:
 	LVGLPropertyTACursorType()
@@ -54,15 +54,15 @@ public:
 	QString name() const { return "Cursor type"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_cursor_type(%1, %2);").arg(obj->codeName()).arg(m_values.at(get(obj)));
+        return QStringList() << QString("lv_textarea_set_cursor_type(%1, %2);").arg(obj->codeName()).arg(m_values.at(get(obj)));
 	}
 
 protected:
-	int get(LVGLObject *obj) const { return lv_ta_get_cursor_type(obj->obj()) & 0x7f; }
-	void set(LVGLObject *obj, int index) { lv_ta_set_cursor_type(obj->obj(), index & 0x7f); }
+    int get(LVGLObject *obj) const { return lv_textarea_get_cursor_type(obj->obj()) & 0x7f; }
+    void set(LVGLObject *obj, int index) { lv_textarea_set_cursor_type(obj->obj(), index & 0x7f); }
 
 	QStringList m_values;
-};
+};*/
 
 class LVGLPropertyTACursorBlinkTime : public LVGLPropertyInt
 {
@@ -72,12 +72,12 @@ public:
 	QString name() const { return "Cursor blink time"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_cursor_blink_time(%1, %2);").arg(obj->codeName()).arg(get(obj));
+        return QStringList() << QString("lv_textarea_set_cursor_blink_time(%1, %2);").arg(obj->codeName()).arg(get(obj));
 	}
 
 protected:
-	int get(LVGLObject *obj) const { return lv_ta_get_cursor_blink_time(obj->obj()); }
-	void set(LVGLObject *obj, int index) { lv_ta_set_cursor_blink_time(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_textarea_get_cursor_blink_time(obj->obj()); }
+    void set(LVGLObject *obj, int index) { lv_textarea_set_cursor_blink_time(obj->obj(), index & 0xff); }
 };
 
 class LVGLPropertyTAOneLineMode : public LVGLPropertyBool
@@ -86,12 +86,12 @@ public:
 	QString name() const { return "One line mode"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_one_line(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
+        return QStringList() << QString("lv_textarea_set_one_line(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_ta_get_one_line(obj->obj()); }
-	void set(LVGLObject *obj, bool statue) { lv_ta_set_one_line(obj->obj(), statue); }
+    bool get(LVGLObject *obj) const { return lv_textarea_get_one_line(obj->obj()); }
+    void set(LVGLObject *obj, bool statue) { lv_textarea_set_one_line(obj->obj(), statue); }
 };
 
 class LVGLPropertyTAPasswordMode : public LVGLPropertyBool
@@ -100,28 +100,28 @@ public:
 	QString name() const { return "Password mode"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_pwd_mode(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
+        return QStringList() << QString("lv_textarea_set_pwd_mode(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_ta_get_pwd_mode(obj->obj()); }
-	void set(LVGLObject *obj, bool statue) { lv_ta_set_pwd_mode(obj->obj(), statue); }
+    bool get(LVGLObject *obj) const { return lv_textarea_get_pwd_mode(obj->obj()); }
+    void set(LVGLObject *obj, bool statue) { lv_textarea_set_pwd_mode(obj->obj(), statue); }
 };
 
 class LVGLPropertyTAMaxLen : public LVGLPropertyInt
 {
 public:
-	LVGLPropertyTAMaxLen() : LVGLPropertyInt(0, LV_TA_CURSOR_LAST-1) {}
+    LVGLPropertyTAMaxLen() : LVGLPropertyInt(0, LV_TEXTAREA_CURSOR_LAST-1) {}
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_max_length(%1, %2);").arg(obj->codeName()).arg(get(obj));
+        return QStringList() << QString("lv_textarea_set_max_length(%1, %2);").arg(obj->codeName()).arg(get(obj));
 	}
 
 	QString name() const { return "Max length"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_ta_get_max_length(obj->obj()); }
-	void set(LVGLObject *obj, int index) { lv_ta_set_max_length(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_textarea_get_max_length(obj->obj()); }
+    void set(LVGLObject *obj, int index) { lv_textarea_set_max_length(obj->obj(), index & 0xff); }
 };
 
 class LVGLPropertyTATextAlign : public LVGLPropertyEnum
@@ -133,8 +133,8 @@ public:
 	QString name() const { return "Text align"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_label_get_align(lv_ta_get_label(obj->obj()));  }
-	void set(LVGLObject *obj, int index) { lv_ta_set_text_align(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_label_get_align(lv_textarea_get_label(obj->obj()));  }
+    void set(LVGLObject *obj, int index) { lv_textarea_set_text_align(obj->obj(), index & 0xff); }
 };
 
 class LVGLPropertyTAScrollbars : public LVGLPropertyEnum
@@ -146,8 +146,8 @@ public:
 	QString name() const { return "Scrollbars"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_ta_get_sb_mode(lv_ta_get_label(obj->obj())) & 0x3;  }
-	void set(LVGLObject *obj, int index) { lv_ta_set_sb_mode(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_textarea_get_scrollbar_mode(lv_textarea_get_label(obj->obj())) & 0x3;  }
+    void set(LVGLObject *obj, int index) { lv_textarea_set_sscrollbar_mode(obj->obj(), index & 0xff); }
 };
 
 class LVGLPropertyTAScrollPropagation : public LVGLPropertyBool
@@ -156,12 +156,12 @@ public:
 	QString name() const { return "Scroll propagation"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_scroll_propagation(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
+        return QStringList() << QString("lv_textarea_set_scroll_propagation(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_ta_get_scroll_propagation(obj->obj()); }
-	void set(LVGLObject *obj, bool boolean) { lv_ta_set_scroll_propagation(obj->obj(), boolean); }
+    bool get(LVGLObject *obj) const { return lv_textarea_get_scroll_propagation(obj->obj()); }
+    void set(LVGLObject *obj, bool boolean) { lv_textarea_set_scroll_propagation(obj->obj(), boolean); }
 };
 
 class LVGLPropertyTAEdgeFlash : public LVGLPropertyBool
@@ -170,12 +170,12 @@ public:
 	QString name() const { return "Edge flash"; }
 
 	QStringList function(LVGLObject *obj) const {
-		return QStringList() << QString("lv_ta_set_edge_flash(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
+        return QStringList() << QString("lv_textarea_set_edge_flash(%1, %2);").arg(obj->codeName()).arg(QVariant(get(obj)).toString());
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_ta_get_edge_flash(obj->obj()); }
-	void set(LVGLObject *obj, bool boolean) { lv_ta_set_edge_flash(obj->obj(), boolean); }
+    bool get(LVGLObject *obj) const { return lv_textarea_get_edge_flash(obj->obj()); }
+    void set(LVGLObject *obj, bool boolean) { lv_textarea_set_edge_flash(obj->obj(), boolean); }
 };
 
 LVGLTextArea::LVGLTextArea()
@@ -183,7 +183,7 @@ LVGLTextArea::LVGLTextArea()
 	m_properties << new LVGLPropertyTAText;
 	m_properties << new LVGLPropertyTAPlaceholder;
 	m_properties << new LVGLPropertyTACursorPos;
-	m_properties << new LVGLPropertyTACursorType;
+//	m_properties << new LVGLPropertyTACursorType;
 	m_properties << new LVGLPropertyTACursorBlinkTime;
 	m_properties << new LVGLPropertyTAOneLineMode;
 	m_properties << new LVGLPropertyTAPasswordMode;
@@ -193,11 +193,11 @@ LVGLTextArea::LVGLTextArea()
 	m_properties << new LVGLPropertyTAScrollPropagation;
 	m_properties << new LVGLPropertyTAEdgeFlash;
 
-	m_editableStyles << LVGL::StyleParts(LVGL::Body | LVGL::Text); // LV_TA_STYLE_BG
-	m_editableStyles << LVGL::Body; // LV_TA_STYLE_SB
-	m_editableStyles << LVGL::StyleParts(LVGL::BodyPadding | LVGL::Line); // LV_TA_STYLE_CURSOR
-	m_editableStyles << LVGL::Body; // LV_TA_STYLE_EDGE_FLASH
-	m_editableStyles << LVGL::StyleParts(LVGL::Body | LVGL::Text); // LV_TA_STYLE_PLACEHOLDER
+    m_editableStyles << LVGL::StyleParts(LVGL::Body | LVGL::Text); // lv_textarea_STYLE_BG
+    m_editableStyles << LVGL::Body; // lv_textarea_STYLE_SB
+    m_editableStyles << LVGL::StyleParts(LVGL::BodyPadding | LVGL::Line); // lv_textarea_STYLE_CURSOR
+    m_editableStyles << LVGL::Body; // lv_textarea_STYLE_EDGE_FLASH
+    m_editableStyles << LVGL::StyleParts(LVGL::Body | LVGL::Text); // lv_textarea_STYLE_PLACEHOLDER
 }
 
 QString LVGLTextArea::name() const
@@ -227,7 +227,7 @@ QIcon LVGLTextArea::icon() const
 
 lv_obj_t *LVGLTextArea::newObject(lv_obj_t *parent) const
 {
-	lv_obj_t *obj = lv_ta_create(parent, nullptr);
+    lv_obj_t *obj = lv_textarea_create(parent, nullptr);
 	return obj;
 }
 
@@ -238,28 +238,30 @@ QSize LVGLTextArea::minimumSize() const
 
 QStringList LVGLTextArea::styles() const
 {
-	return QStringList() << "LV_TA_STYLE_BG"
-								<< "LV_TA_STYLE_SB"
-								<< "LV_TA_STYLE_CURSOR"
-								<< "LV_TA_STYLE_EDGE_FLASH"
-								<< "LV_TA_STYLE_PLACEHOLDER";
+    return QStringList() << "lv_textarea_STYLE_BG"
+                                << "lv_textarea_STYLE_SB"
+                                << "lv_textarea_STYLE_CURSOR"
+                                << "lv_textarea_STYLE_EDGE_FLASH"
+                                << "lv_textarea_STYLE_PLACEHOLDER";
 }
 
 lv_style_t *LVGLTextArea::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_ta_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_textarea_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLTextArea::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_ta_set_style(obj, static_cast<lv_ta_style_t>(type), style);
+//	lv_textarea_set_style(obj, static_cast<lv_textarea_style_t>(type), style);
 }
 
 lv_style_t *LVGLTextArea::defaultStyle(int type) const
 {
-	if (type == LV_TA_STYLE_BG)
+/*	if (type == lv_textarea_STYLE_BG)
 		return &lv_style_pretty;
-	else if (type == LV_TA_STYLE_SB)
-		return &lv_style_pretty_color;
+    else if (type == lv_textarea_STYLE_SB)
+        return &lv_style_pretty_color;*/
 	return nullptr;
 }
+

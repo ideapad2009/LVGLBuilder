@@ -15,7 +15,7 @@ public:
 	QString name() const { return "State"; }
 
 	QStringList function(LVGLObject *obj) const {
-		if (get(obj) != LV_BTN_STATE_REL)
+        if (get(obj) != LV_BTN_STATE_RELEASED)
 			return QStringList() << QString("lv_btn_set_state(%1, %2);").arg(obj->codeName()).arg(m_values.at(get(obj)));
 		return QStringList();
 	}
@@ -52,10 +52,10 @@ protected:
 	QStringList m_values;
 };
 
-class LVGLPropertyButtonToggle : public LVGLPropertyBool
+class LVGLPropertyButtonCheckable : public LVGLPropertyBool
 {
 public:
-	QString name() const { return "Toggle"; }
+    QString name() const { return "Checkable"; }
 
 	QStringList function(LVGLObject *obj) const {
 		if (!get(obj)) return QStringList();
@@ -63,14 +63,14 @@ public:
 	}
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_btn_get_toggle(obj->obj()); }
-	void set(LVGLObject *obj, bool statue) { lv_btn_set_toggle(obj->obj(), statue); }
+    bool get(LVGLObject *obj) const { return lv_btn_get_checkable(obj->obj()); }
+    void set(LVGLObject *obj, bool statue) { lv_btn_set_checkable(obj->obj(), statue); }
 };
 
 LVGLButton::LVGLButton()
 {
 	m_properties << new LVGLPropertyButtonState;
-	m_properties << new LVGLPropertyButtonToggle;
+    m_properties << new LVGLPropertyButtonCheckable;
 	m_properties << new LVGLPropertyButtonLayout;
 
 	m_editableStyles << LVGL::Body; // LV_BTN_STYLE_REL
@@ -127,17 +127,18 @@ QStringList LVGLButton::styles() const
 
 lv_style_t *LVGLButton::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_btn_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_btn_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLButton::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_btn_set_style(obj, static_cast<lv_btn_style_t>(type), style);
+//	lv_btn_set_style(obj, static_cast<lv_btn_style_t>(type), style);
 }
 
 lv_style_t *LVGLButton::defaultStyle(int type) const
 {
-	if (type == LV_BTN_STYLE_REL)
+/*	if (type == LV_BTN_STYLE_REL)
 		return &lv_style_btn_rel;
 	else if (type == LV_BTN_STYLE_PR)
 		return &lv_style_btn_pr;
@@ -146,6 +147,6 @@ lv_style_t *LVGLButton::defaultStyle(int type) const
 	else if (type == LV_BTN_STYLE_TGL_PR)
 		return &lv_style_btn_tgl_pr;
 	else if (type == LV_BTN_STYLE_INA)
-		return &lv_style_btn_ina;
+        return &lv_style_btn_ina;*/
 	return nullptr;
 }

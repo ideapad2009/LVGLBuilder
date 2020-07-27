@@ -78,19 +78,19 @@ public:
 	QString name() const { return "Indicator Colored"; }
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_cpicker_get_indic_colored(obj->obj()); }
-	void set(LVGLObject *obj, bool boolean) { lv_cpicker_set_indic_colored(obj->obj(), boolean); }
+    bool get(LVGLObject *obj) const { return lv_cpicker_get_knob_colored(obj->obj()); }
+    void set(LVGLObject *obj, bool boolean) { lv_cpicker_set_knob_colored(obj->obj(), boolean); }
 };
 
-class LVGLPropertyCPickerPreview : public LVGLPropertyBool
+/*class LVGLPropertyCPickerPreview : public LVGLPropertyBool
 {
 public:
 	QString name() const { return "Preview"; }
 
 protected:
-	bool get(LVGLObject *obj) const { return lv_cpicker_get_preview(obj->obj()); }
-	void set(LVGLObject *obj, bool boolean) { lv_cpicker_set_preview(obj->obj(), boolean); }
-};
+    bool get(LVGLObject *obj) const { return lv_cpicker_get_color(obj->obj()); }
+    void set(LVGLObject *obj, bool boolean) { lv_cpicker_set_color(obj->obj(), boolean); }
+};*/
 
 class LVGLPropertyCPickerColor : public LVGLPropertyColor
 {
@@ -110,7 +110,7 @@ LVGLColorPicker::LVGLColorPicker()
 	m_properties << new LVGLPropertyCPickerValue;
 	m_properties << new LVGLPropertyCPickerMode;
 	m_properties << new LVGLPropertyCPickerIndicator;
-	m_properties << new LVGLPropertyCPickerPreview;
+//    m_properties << new LVGLPropertyCPickerPreview;
 	m_properties << new LVGLPropertyCPickerColor;
 
 	m_editableStyles << LVGL::StyleParts(LVGL::Body | LVGL::Line); // LV_CPICKER_STYLE_MAIN
@@ -163,19 +163,21 @@ QStringList LVGLColorPicker::styles() const
 
 lv_style_t *LVGLColorPicker::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_cpicker_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_cpicker_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLColorPicker::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_cpicker_set_style(obj, static_cast<lv_cpicker_style_t>(type), style);
+//	lv_cpicker_set_style(obj, static_cast<lv_cpicker_style_t>(type), style);
 }
 
 lv_style_t *LVGLColorPicker::defaultStyle(int type) const
 {
-	if (type == LV_CPICKER_STYLE_MAIN)
+/*	if (type == LV_CPICKER_STYLE_MAIN)
 		return &lv_style_plain;
 	else if (type == LV_CPICKER_STYLE_INDICATOR)
-		return &lv_style_plain;
+        return &lv_style_plain;*/
 	return nullptr;
 }
+

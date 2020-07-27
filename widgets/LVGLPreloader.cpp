@@ -11,8 +11,8 @@ public:
 	QString name() const { return "Arc length"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_preload_get_arc_length(obj->obj()); }
-	void set(LVGLObject *obj, int value) { lv_preload_set_arc_length(obj->obj(), static_cast<lv_anim_value_t>(value)); }
+    int get(LVGLObject *obj) const { return lv_spinner_get_arc_length(obj->obj()); }
+    void set(LVGLObject *obj, int value) { lv_spinner_set_arc_length(obj->obj(), static_cast<lv_anim_value_t>(value)); }
 };
 
 class LVGLPropertyPreloadSpinTime : public LVGLPropertyInt
@@ -23,8 +23,8 @@ public:
 	QString name() const { return "Spin time"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_preload_get_spin_time(obj->obj()); }
-	void set(LVGLObject *obj, int value) { lv_preload_set_spin_time(obj->obj(), static_cast<uint16_t>(value)); }
+    int get(LVGLObject *obj) const { return lv_spinner_get_spin_time(obj->obj()); }
+    void set(LVGLObject *obj, int value) { lv_spinner_set_spin_time(obj->obj(), static_cast<uint16_t>(value)); }
 };
 
 class LVGLPropertyPreloadType : public LVGLPropertyEnum
@@ -37,8 +37,8 @@ public:
 	QString name() const { return "Spin type"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_preload_get_type(obj->obj()); }
-	void set(LVGLObject *obj, int index) { lv_preload_set_type(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_spinner_get_type(obj->obj()); }
+    void set(LVGLObject *obj, int index) { lv_spinner_set_type(obj->obj(), index & 0xff); }
 };
 
 class LVGLPropertyPreloadDir : public LVGLPropertyEnum
@@ -51,8 +51,8 @@ public:
 	QString name() const { return "Spin direction"; }
 
 protected:
-	int get(LVGLObject *obj) const { return lv_preload_get_dir(obj->obj()); }
-	void set(LVGLObject *obj, int index) { lv_preload_set_dir(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_spinner_get_dir(obj->obj()); }
+    void set(LVGLObject *obj, int index) { lv_spinner_set_dir(obj->obj(), index & 0xff); }
 };
 
 LVGLPreloader::LVGLPreloader()
@@ -62,7 +62,7 @@ LVGLPreloader::LVGLPreloader()
 	m_properties << new LVGLPropertyPreloadType;
 	m_properties << new LVGLPropertyPreloadDir;
 
-	m_editableStyles << LVGL::StyleParts(LVGL::BodyBorder | LVGL::BodyPadding | LVGL::Line); // LV_PRELOAD_STYLE_MAIN
+    m_editableStyles << LVGL::StyleParts(LVGL::BodyBorder | LVGL::BodyPadding | LVGL::Line); // lv_spinner_STYLE_MAIN
 }
 
 QString LVGLPreloader::name() const
@@ -92,7 +92,7 @@ QIcon LVGLPreloader::icon() const
 
 lv_obj_t *LVGLPreloader::newObject(lv_obj_t *parent) const
 {
-	lv_obj_t *obj = lv_preload_create(parent, nullptr);
+    lv_obj_t *obj = lv_spinner_create(parent, nullptr);
 	return obj;
 }
 
@@ -103,22 +103,23 @@ QSize LVGLPreloader::minimumSize() const
 
 QStringList LVGLPreloader::styles() const
 {
-	return QStringList() << "LV_PRELOAD_STYLE_MAIN";
+    return QStringList() << "lv_spinner_STYLE_MAIN";
 }
 
 lv_style_t *LVGLPreloader::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_preload_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_spinner_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLPreloader::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_preload_set_style(obj, static_cast<lv_preload_style_t>(type), style);
+//	lv_spinner_set_style(obj, static_cast<lv_spinner_style_t>(type), style);
 }
 
 lv_style_t *LVGLPreloader::defaultStyle(int type) const
 {
-	if (type == LV_PRELOAD_STYLE_MAIN)
-		return &lv_style_pretty_color;
+//	if (type == lv_spinner_STYLE_MAIN)
+//		return &lv_style_pretty_color;
 	return nullptr;
 }

@@ -162,17 +162,18 @@ QStringList LVGLImage::styles() const
 
 lv_style_t *LVGLImage::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_img_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_img_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLImage::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_img_set_style(obj, static_cast<lv_img_style_t>(type), style);
+//	lv_img_set_style(obj, static_cast<lv_img_style_t>(type), style);
 }
 
 lv_style_t *LVGLImage::defaultStyle(int type) const
 {
-	if (type == LV_IMG_STYLE_MAIN)
-		return &lv_style_plain;
+/*	if (type == LV_IMG_STYLE_MAIN)
+        return &lv_style_plain;*/
 	return nullptr;
 }

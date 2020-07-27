@@ -55,8 +55,8 @@ class LVGLBodyPartDialog : public QDialog
 public:
 	LVGLBodyPartDialog(QWidget *parent = nullptr);
 
-	void setBodyParts(lv_border_part_t parts);
-	lv_border_part_t bodyParts() const;
+//	void setBodyParts(lv_border_part_t parts);
+//	lv_border_part_t bodyParts() const;
 
 private:
 	class QListWidget *m_list;

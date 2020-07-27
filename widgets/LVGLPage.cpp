@@ -19,8 +19,8 @@ public:
 	}
 
 protected:
-	int get(LVGLObject *obj) const { return lv_page_get_sb_mode(obj->obj()) & 0x03; }
-	void set(LVGLObject *obj, int index) { lv_page_set_sb_mode(obj->obj(), index & 0xff); }
+    int get(LVGLObject *obj) const { return lv_page_get_scrlbar_mode(obj->obj()) & 0x03; }
+    void set(LVGLObject *obj, int index) { lv_page_set_scrlbar_mode(obj->obj(), index & 0xff); }
 
 	QStringList m_values;
 };
@@ -133,21 +133,22 @@ QStringList LVGLPage::styles() const
 
 lv_style_t *LVGLPage::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_page_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_page_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLPage::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_page_set_style(obj, static_cast<lv_btn_style_t>(type), style);
+//	lv_page_set_style(obj, static_cast<lv_btn_style_t>(type), style);
 }
 
 lv_style_t *LVGLPage::defaultStyle(int type) const
 {
-	if (type == LV_PAGE_STYLE_BG)
+/*	if (type == LV_PAGE_STYLE_BG)
 		return &lv_style_pretty_color;
 	else if (type == LV_PAGE_STYLE_SCRL)
 		return &lv_style_pretty;
 	else if (type == LV_PAGE_STYLE_SB)
-		return &lv_style_pretty_color;
+        return &lv_style_pretty_color;*/
 	return nullptr;
 }

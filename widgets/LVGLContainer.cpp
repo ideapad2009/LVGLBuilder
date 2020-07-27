@@ -16,7 +16,7 @@ public:
 	QString name() const { return "Layout"; }
 
 	QStringList function(LVGLObject *obj) const {
-		if (get(obj) != LV_BTN_STATE_REL)
+        if (get(obj) != LV_BTN_STATE_RELEASED)
 			return QStringList() << QString("lv_cont_set_layout(%1, %2);").arg(obj->codeName()).arg(m_values.at(get(obj)));
 		return QStringList();
 	}
@@ -79,17 +79,18 @@ QStringList LVGLContainer::styles() const
 
 lv_style_t *LVGLContainer::style(lv_obj_t *obj, int type) const
 {
-	return const_cast<lv_style_t*>(lv_cont_get_style(obj, type & 0xff));
+//	return const_cast<lv_style_t*>(lv_cont_get_style(obj, type & 0xff));
+    return nullptr;
 }
 
 void LVGLContainer::setStyle(lv_obj_t *obj, int type, lv_style_t *style) const
 {
-	lv_cont_set_style(obj, static_cast<lv_btn_style_t>(type), style);
+//	lv_cont_set_style(obj, static_cast<lv_btn_style_t>(type), style);
 }
 
 lv_style_t *LVGLContainer::defaultStyle(int type) const
 {
-	if (type == LV_CONT_STYLE_MAIN)
-		return &lv_style_pretty;
+//	if (type == LV_CONT_STYLE_MAIN)
+//		return &lv_style_pretty;
 	return nullptr;
 }

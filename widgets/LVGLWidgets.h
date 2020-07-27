@@ -10,10 +10,10 @@
 #include "LVGLCheckBox.h"
 #include "LVGLColorPicker.h"
 #include "LVGLContainer.h"
-#include "LVGLDropDownList.h"
+//#include "LVGLDropDownList.h"
 #include "LVGLImage.h"
 #include "LVGLImageButton.h"
-#include "LVGLImageSlider.h"
+//#include "LVGLImageSlider.h" //Gone from v7.x
 #include "LVGLKeyboard.h"
 #include "LVGLLabel.h"
 #include "LVGLLED.h"
