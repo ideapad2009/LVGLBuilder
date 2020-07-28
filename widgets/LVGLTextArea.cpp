@@ -147,7 +147,7 @@ public:
 
 protected:
     int get(LVGLObject *obj) const { return lv_textarea_get_scrollbar_mode(lv_textarea_get_label(obj->obj())) & 0x3;  }
-    void set(LVGLObject *obj, int index) { lv_textarea_set_sscrollbar_mode(obj->obj(), index & 0xff); }
+    void set(LVGLObject *obj, int index) { lv_textarea_set_scrollbar_mode(obj->obj(), index & 0xff); }
 };
 
 class LVGLPropertyTAScrollPropagation : public LVGLPropertyBool
