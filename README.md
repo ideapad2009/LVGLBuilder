@@ -6,10 +6,13 @@ A WIP fork of GUI Builder for littlevgl written in C++ and using LVGL for previe
 ### Prerequisites
 * [Qt 5.11+](https://www.qt.io/) - The Qt framework
 * C++11
-* LVGL 7.2.0 (included in source since a few adaptions are applied)
+* LVGL 7.2.0
 
 Tested:
  * Windows 7 + MinGW 7.x + Qt 5.14.0
+
+### Source
+This project has a git submodule for LVGL, you must clone the full repository via git using ```git clone --recursive https://github.com/thedjnK/LVGLBuilder.git```
 
 ### Build
 Building with console:
